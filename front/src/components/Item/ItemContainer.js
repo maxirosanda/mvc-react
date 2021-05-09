@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Item from './Item'
 import {Spinner} from 'react-bootstrap'
-import {getFirestore} from '../../firebase/index'
 import request  from 'superagent';
 const ItemList= () => {
   const [loading,setLoading] = useState(false)
