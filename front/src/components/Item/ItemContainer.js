@@ -16,7 +16,7 @@ const ItemList= () => {
     })
   
 
-      },[])
+      },[items])
    
   useEffect(()=>{
     items.length && setLoading(false) 

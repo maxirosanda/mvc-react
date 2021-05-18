@@ -1,10 +1,18 @@
 const ProductosController = require('../controllers/productosController');
 const CarritoController = require('../controllers/carritoController');
 const MensajesController = require('../controllers/mensajesController');
-  
+const middlewareAdmin = require('../middlewares/middlewareAdmin')
+const controllerSession = require('../controllers/controllerSession')  
+
 module.exports = app => {
+  
+  app.get('/logout',controllerSession.sessionLogout),
+  app.get('/login',controllerSession.login)
+  app.get('/contenido',middlewareAdmin.auth,(req,res) =>{
+    res.send("contenido para ver")
+})
   app.get('/productos/vista-test/:cant', ProductosController.getProductosFake);
-  app.get('/productos', ProductosController.getProductos);
+  app.get('/productos',middlewareAdmin.auth, ProductosController.getProductos);
   app.get('/productos/:id',ProductosController.getProducto);
   app.get('/productos/cat/:categoria',ProductosController.getProductosCategoria);
   app.post('/productos', ProductosController.createProductos);

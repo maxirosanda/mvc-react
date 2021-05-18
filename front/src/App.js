@@ -5,6 +5,7 @@ import Footer from "./components/footer/FooTer"
 import CartContainer from "./components/Cart/CartContainer"
 import CategoryContainer from "./components/Item/CategoryContainer"
 import ItemContainer from './components/Item/ItemContainer'
+import LoginContainer from './components/Login/loginContainer'
 import FakerContainer from './components/faker/FakerContainer'
 import { Switch, Route, BrowserRouter } from "react-router-dom"
 import {Context} from './Context'
@@ -18,6 +19,7 @@ const App = () => {
       <Context>
         <NavBar />
         <Switch>
+          <Route exact path="/login" component={LoginContainer}/>
           <Route exact path="/item/:id" component={ItemDetailContainer} />
           <Route exact path="/cart" component={CartContainer} />
           <Route exact path="/categoria/:categoria" component={CategoryContainer}/>
