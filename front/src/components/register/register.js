@@ -8,7 +8,7 @@ const Login = ({clickFormulario,tomandoUsuario,tomandoPassword}) => {
     <React.Fragment >
       <div className="row justify-content-center">
       <Form className="col-4 align-self-center" onSubmit={(e) =>{clickFormulario(e)}}>
-        <h1>Login de Usuario</h1> 
+        <h1>Registro de Usuario</h1> 
         <Form.Group controlId="formBasicEmail">
           <Form.Control type="text" name="usuario" onChange={tomandoUsuario} placeholder="Ingrese su usuario" />
         </Form.Group>
@@ -16,7 +16,7 @@ const Login = ({clickFormulario,tomandoUsuario,tomandoPassword}) => {
              <Form.Control type="password" name="password" onChange={tomandoPassword} placeholder="Password" />
         </Form.Group>
         <Button variant="primary" type="submit">Ingresar</Button>
-        <Button href="http://localhost:8080/facebook" className=" ml-2" variant="primary" >Login con Facebook</Button>
+        <Button href="http://localhost:8080/facebook" className=" ml-2" variant="primary" >Registro con Facebook</Button>
       </Form>
       
       </div>

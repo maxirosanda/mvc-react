@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Login from "./login";
+import Register from "./register";
 import request from "superagent";
 import { Redirect } from "react-router";
 const CartContainer = () => {
@@ -26,11 +26,11 @@ const CartContainer = () => {
 
   return (
     <React.Fragment>
-      <Login
+      <Register
         clickFormulario={clickFormulario}
         tomandoUsuario={tomandoUsuario}
         tomandoPassword={tomandoPassword}
-      ></Login>
+      ></Register>
     </React.Fragment>
   );
 };

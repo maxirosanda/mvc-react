@@ -13,13 +13,13 @@ module.exports = app => {
   app.post("/register", passport.authenticate('register', {failureRedirect: 'failRegister'}), sessionController.register);
   app.get("/logout", sessionController.logout);
   app.get("/facebook", passport.authenticate("facebook"));
-  app.get("/facebook/callback", passport.authenticate('facebook', {successRedirect: '/contenido', failureRedirect: '/failRegister'}));
+  app.get("/facebook/callback", passport.authenticate('facebook', {successRedirect: 'http://localhost:3000', failureRedirect: 'http://localhost:3000/error'}));
 
-  app.get('/contenido',middlewareAdmin.auth,(req,res) =>{
+  app.get('/contenido',(req,res) =>{
     res.send("contenido para ver")
 })
   app.get('/productos/vista-test/:cant', ProductosController.getProductosFake);
-  app.get('/productos',middlewareAdmin.auth, ProductosController.getProductos);
+  app.get('/productos',ProductosController.getProductos);
   app.get('/productos/:id',ProductosController.getProducto);
   app.get('/productos/cat/:categoria',ProductosController.getProductosCategoria);
   app.post('/productos', ProductosController.createProductos);
