@@ -2,12 +2,19 @@ const ProductosController = require('../controllers/productosController');
 const CarritoController = require('../controllers/carritoController');
 const MensajesController = require('../controllers/mensajesController');
 const middlewareAdmin = require('../middlewares/middlewareAdmin')
-const controllerSession = require('../controllers/controllerSession')  
+const sessionController = require('../controllers/sessionController')
+const passport = require("passport");  
 
 module.exports = app => {
   
-  app.get('/logout',controllerSession.sessionLogout),
-  app.get('/login',controllerSession.login)
+  app.get("/failLogin", (req, res) => { res.send("falla al logear")});
+  app.post("/login", passport.authenticate('login', {failureRedirect: 'failLogin'}), sessionController.login);
+  app.get("/failRegister", (req, res) => { res.send("falla al registrar")});
+  app.post("/register", passport.authenticate('register', {failureRedirect: 'failRegister'}), sessionController.register);
+  app.get("/logout", sessionController.logout);
+  app.get("/facebook", passport.authenticate("facebook"));
+  app.get("/facebook/callback", passport.authenticate('facebook', {successRedirect: '/contenido', failureRedirect: '/failRegister'}));
+
   app.get('/contenido',middlewareAdmin.auth,(req,res) =>{
     res.send("contenido para ver")
 })
