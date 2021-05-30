@@ -7,6 +7,8 @@ const passport = require("passport");
 
 module.exports = app => {
   
+
+  
   app.get("/failLogin", (req, res) => { res.send("falla al logear")});
   app.post("/login", passport.authenticate('login', {failureRedirect: 'failLogin'}), sessionController.login);
   app.get("/failRegister", (req, res) => { res.send("falla al registrar")});
@@ -15,7 +17,7 @@ module.exports = app => {
   app.get("/facebook", passport.authenticate("facebook"));
   app.get("/facebook/callback", passport.authenticate('facebook', {successRedirect: 'http://localhost:3000', failureRedirect: 'http://localhost:3000/error'}));
 
-  app.get('/contenido',(req,res) =>{
+  app.get('/contenido',middlewareAdmin.auth,(req,res) =>{
     res.send("contenido para ver")
 })
   app.get('/productos/vista-test/:cant', ProductosController.getProductosFake);

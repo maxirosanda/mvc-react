@@ -7,16 +7,16 @@ const CartContainer = () => {
   const [password, setPassword] = useState("")
  
   const tomandoUsuario = (e) => {
-    setUsuario(e.target.value);
+    setUsuario(e.target.value.usuario);
   };
   const tomandoPassword = (e) => {
-    setPassword(e.target.value);
+    setPassword(e.target.value.password);
   };
   const clickFormulario = (e) => {
     e.preventDefault();
     request
-      .get("http://localhost:8080/login")
-      .query({ usuario: usuario }) // query string
+      .post("http://localhost:8080/register")
+      .query({ usuario: usuario,password: password }) // query string
       .end((err, res) => {
         console.log(err);
         console.log(res);

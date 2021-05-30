@@ -5,8 +5,7 @@ const usuariosCollection='usuarios'
 const usuariosSchema = new mongoose.Schema({
 
     usename:{type:String,require:true},
-    password:{type:String,require:true},
-
+    password:{type:String,require:true}
 
 })
 

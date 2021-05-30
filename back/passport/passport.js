@@ -43,22 +43,25 @@ passport.use('register', new LocalStrategy({
     process.nextTick(findOrCreateUser);
   })
 )
+ 
 passport.use('facebook', new FacebookStrategy({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
     callbackURL: "/facebook/callback"
   }, (accessToken, refreshToken, profile, done) => {
-    console.log(profile);
-    let usuario = usuarios.find(usuario => usuario.username==profile.displayName)
         let user = {};
         user.username = profile.displayName;
         user.password = profile.id;
+       
+        let usuario = usuarios.find(usuario => usuario.username==profile.displayName)
         if(!usuario){
             user.contador = 0;
             usuarios.push(user); 
         }
+       
     return done(null, user);
   }))
+ 
 
 passport.serializeUser(function(user, done) {
     done(null, user.username);
@@ -66,7 +69,7 @@ passport.serializeUser(function(user, done) {
    
   passport.deserializeUser(function(username, done) {
     let usuario = usuarios.find(usuario => usuario.username == username)
-    done(null, usuario);
+      done(null, usuario)
 });
 
 
