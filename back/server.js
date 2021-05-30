@@ -11,7 +11,7 @@ const ecommerceRoutes = require('./routes/ecommerceRoutes');
 const conectarDB = require('./config/db')
 const http = require('http'); 
 const server = http.createServer(app); 
-const port = process.env.PORT || '8080';
+const port = process.argv[2] || '8080';
 const MongoStore =require('connect-mongo')
 const advancedOptions= {useNewUrlParser:true,useUnifiedTopology:true}
 app.use(cookieParser());

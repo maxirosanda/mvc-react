@@ -7,8 +7,54 @@ const passport = require("passport");
 
 module.exports = app => {
   
+  app.get("/info",(req,res)=>{
+    argumentos=process.argv
+    res.status(200).send(
+      `Primer Argumento de entrada: ${argumentos[0]}
+      </br> segundo argumento de entrada ${argumentos[1]}
+      </br> Sistema Operativo:${process.platform} 
+      </br> Version de node:${process.version}
+      </br> Uso de memoria: ${process.memoryUsage()}
+      </br> path: ${process.execPath}
+      </br> Id de proceso: ${process.pid}
+      </br> Carpera corriente: ${process.cwd()}` )
+  })
 
-  
+  app.get("/random/:cant",(req,res)=>{
+    let numeros={1:0}
+    let numero
+    for (let i = 0; i < req.params.cant ; i++) {
+    numero = Math.floor((Math.random() * 999))
+    if(!numeros[numero]){
+      numeros[numero]= 0
+    }
+    for (let index in numeros) {
+      if(numero == index){
+       numeros[index] = numeros[index] + 1
+      }
+    }
+    }
+   res.status(200).send(numeros)
+   })
+
+  app.get("/random",(req,res)=>{
+    let numeros={1:0}
+    let numero
+    for (let i = 0; i < 100000000 ; i++) {
+    numero = Math.floor((Math.random() * 999))
+    if(!numeros[numero]){
+      numeros[numero]= 0
+    }
+    for (let index in numeros) {
+      if(numero == index){
+       numeros[index] = numeros[index] + 1
+      }
+    }
+    }
+   res.status(200).send(numeros)
+   })
+
+   
   app.get("/failLogin", (req, res) => { res.send("falla al logear")});
   app.post("/login", passport.authenticate('login', {failureRedirect: 'failLogin'}), sessionController.login);
   app.get("/failRegister", (req, res) => { res.send("falla al registrar")});
