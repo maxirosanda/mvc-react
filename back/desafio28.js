@@ -14,7 +14,7 @@ for (let index in numeros) {
 }
 return numeros
 }
-process.on('message',(cant)=>{
-  const numeros = numerosrandom(cant)
+process.on('message',()=>{
+  const numeros = numerosrandom()
   process.send(numeros)
 })
