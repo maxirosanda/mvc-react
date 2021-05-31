@@ -4,7 +4,7 @@ const MensajesController = require('../controllers/mensajesController');
 const middlewareAdmin = require('../middlewares/middlewareAdmin')
 const sessionController = require('../controllers/sessionController')
 const passport = require("passport");  
-
+const {fork} = require("child_process")
 module.exports = app => {
   
   app.get("/info",(req,res)=>{
@@ -21,37 +21,21 @@ module.exports = app => {
   })
 
   app.get("/random/:cant",(req,res)=>{
-    let numeros={1:0}
-    let numero
-    for (let i = 0; i < req.params.cant ; i++) {
-    numero = Math.floor((Math.random() * 999))
-    if(!numeros[numero]){
-      numeros[numero]= 0
-    }
-    for (let index in numeros) {
-      if(numero == index){
-       numeros[index] = numeros[index] + 1
-      }
-    }
-    }
-   res.status(200).send(numeros)
+  const numeros = fork("./desafio28.js")
+    numeros.send('start')
+
+    numeros.on('message',num =>{
+      res.status(200).send(num)
+    })
    })
 
   app.get("/random",(req,res)=>{
-    let numeros={1:0}
-    let numero
-    for (let i = 0; i < 100000000 ; i++) {
-    numero = Math.floor((Math.random() * 999))
-    if(!numeros[numero]){
-      numeros[numero]= 0
-    }
-    for (let index in numeros) {
-      if(numero == index){
-       numeros[index] = numeros[index] + 1
-      }
-    }
-    }
-   res.status(200).send(numeros)
+    const numeros = fork("./desafio28.js")
+    numeros.send('start')
+    numeros.on('message',num =>{
+      res.status(200).send(num)
+    })
+   
    })
 
    
