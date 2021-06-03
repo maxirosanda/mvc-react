@@ -22,8 +22,8 @@ module.exports = app => {
 
   app.get("/random/:cant",(req,res)=>{
   const numeros = fork("./desafio28.js")
-    numeros.send('start')
-
+  let cantidad = req.params.cant
+    numeros.send({cantidad})
     numeros.on('message',num =>{
       res.status(200).send(num)
     })
@@ -31,7 +31,7 @@ module.exports = app => {
 
   app.get("/random",(req,res)=>{
     const numeros = fork("./desafio28.js")
-    numeros.send('start')
+    numeros.send("start")
     numeros.on('message',num =>{
       res.status(200).send(num)
     })
