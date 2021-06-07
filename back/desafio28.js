@@ -1,7 +1,7 @@
 numerosrandom = (cant) =>{
-let numeros={1:0}
+let numeros={}
 let numero
-if(!cant) cant = 100000000
+if(!cant) cant = 1000000
 for (let i = 0; i < cant  ; i++) {
 numero = Math.floor((Math.random() * 999))
 if(!numeros[numero]){

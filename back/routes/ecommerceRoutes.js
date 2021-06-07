@@ -10,14 +10,10 @@ module.exports = app => {
   app.get("/info",(req,res)=>{
     argumentos=process.argv
     res.status(200).send(
-      `Primer Argumento de entrada: ${argumentos[0]}
-      </br> segundo argumento de entrada ${argumentos[1]}
-      </br> Sistema Operativo:${process.platform} 
-      </br> Version de node:${process.version}
-      </br> Uso de memoria: ${process.memoryUsage()}
-      </br> path: ${process.execPath}
-      </br> Id de proceso: ${process.pid}
-      </br> Carpera corriente: ${process.cwd()}` )
+      `</br> Port :${process.argv[2]}
+       </br> Id de proceso: ${process.pid}
+       </br> fecha: ${new Date()}
+` )
   })
 
   app.get("/random/:cant",(req,res)=>{
