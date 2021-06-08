@@ -5,17 +5,23 @@ const middlewareAdmin = require('../middlewares/middlewareAdmin')
 const sessionController = require('../controllers/sessionController')
 const passport = require("passport");  
 const {fork} = require("child_process")
+const cluster = require("cluster");
+const numCpu = require("os").cpus().length;
 module.exports = app => {
   
   app.get("/info",(req,res)=>{
-    argumentos=process.argv
-    res.status(200).send(
-      `</br> Port :${process.argv[2]}
-       </br> Id de proceso: ${process.pid}
-       </br> fecha: ${new Date()}
-` )
+    const calculo = fork("./desafio28.js");
+    calculo.send('start');
+    calculo.on('message',sum =>{
+      res.status(200).send(
+        `</br> Puerto :${process.argv[2]}
+         </br> Id de proceso: ${process.pid}
+         </br> fecha: ${new Date()}
+         </br>Numero de CPUs: ${numCpu}
+  ` )
+    })
   })
-
+/*
   app.get("/random/:cant",(req,res)=>{
   const numeros = fork("./desafio28.js")
   let cantidad = req.params.cant
@@ -33,7 +39,7 @@ module.exports = app => {
     })
    
    })
-
+*/
    
   app.get("/failLogin", (req, res) => { res.send("falla al logear")});
   app.post("/login", passport.authenticate('login', {failureRedirect: 'failLogin'}), sessionController.login);

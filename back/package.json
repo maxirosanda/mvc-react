@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod":"forever start -w server.js",
+    "fork":"pm2 start server.js --name='Server1' --watch -- 8081",
+    "cluster":"pm2 start server.js --name='Server2' --watch -i max -- 8082"
   },
   "keywords": [],
   "author": "",

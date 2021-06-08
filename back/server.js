@@ -38,4 +38,4 @@ conectarDB()
 const port = process.argv[2] || '8080';
 app.set('port', port);
 server.listen(port);
-console.log('Server listening on port ' + port);
+console.log('Server listening on port ' + port +' pid:' + process.pid);
