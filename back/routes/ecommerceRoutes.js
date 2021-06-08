@@ -5,11 +5,11 @@ const middlewareAdmin = require('../middlewares/middlewareAdmin')
 const sessionController = require('../controllers/sessionController')
 const passport = require("passport");  
 const {fork} = require("child_process")
-const cluster = require("cluster");
 const numCpu = require("os").cpus().length;
 module.exports = app => {
-  
+  let forma = process.argv[3] || "FORK"
   app.get("/info",(req,res)=>{
+    if(forma =="FORK"){
     const calculo = fork("./desafio28.js");
     calculo.send('start');
     calculo.on('message',sum =>{
@@ -20,6 +20,15 @@ module.exports = app => {
          </br>Numero de CPUs: ${numCpu}
   ` )
     })
+  console.log("pasa por fork")
+  }else{
+      res.status(200).send(
+        `</br> Puerto :${process.argv[2]}
+         </br> Id de proceso: ${process.pid}
+         </br> fecha: ${new Date()}
+         </br>Numero de CPUs: ${numCpu}
+  ` )
+    }
   })
 /*
   app.get("/random/:cant",(req,res)=>{
