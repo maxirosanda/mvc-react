@@ -3,6 +3,9 @@ const CarritoController = require('../controllers/carritoController');
 const MensajesController = require('../controllers/mensajesController');
 const middlewareAdmin = require('../middlewares/middlewareAdmin')
 const sessionController = require('../controllers/sessionController')
+const loggerInfo=require('pino')();
+const loggerWarn=require('pino')('warn.log');
+const loggerError=require('pino')('error.log')
 const passport = require("passport");  
 const {fork} = require("child_process")
 module.exports = app => {
@@ -33,7 +36,11 @@ module.exports = app => {
     })
    
    })
-
+   app.get('*',(req,res)=>{
+     let {url,method}=req;
+     loggerWarn.warn(`Ruta ${method} -> ${url} no implementada`)
+     res.send(`Ruta ${method} ->${url} no implementada`)
+   })
    
   app.get("/failLogin", (req, res) => { res.send("falla al logear")});
   app.post("/login", passport.authenticate('login', {failureRedirect: 'failLogin'}), sessionController.login);

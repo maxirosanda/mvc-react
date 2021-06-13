@@ -1,0 +1,13 @@
+{"level":50,"time":1623542333849,"pid":7980,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: "}
+{"level":50,"time":1623542377284,"pid":14852,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542445400,"pid":13072,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542467939,"pid":7624,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542482698,"pid":3808,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542488098,"pid":6428,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542502028,"pid":9164,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542514233,"pid":6816,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542520352,"pid":14120,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542532646,"pid":13332,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542557039,"pid":2716,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542564022,"pid":10492,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":50,"time":1623542604868,"pid":2252,"hostname":"DESKTOP-4EBPNN1","msg":"error en el servidor: Error: listen EADDRINUSE: address already in use :::8080"}

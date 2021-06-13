@@ -1,5 +1,8 @@
 
-const express = require('express');  
+const express = require('express');
+const loggerInfo=require('pino')();
+const loggerWarn=require('pino')('warn.log');
+const loggerError=require('pino')('error.log')
 var cors = require('cors')
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
@@ -13,6 +16,8 @@ const http = require('http');
 const server = http.createServer(app); 
 const MongoStore =require('connect-mongo')
 const advancedOptions= {useNewUrlParser:true,useUnifiedTopology:true}
+const compression = require("compression")
+app.use(compression())
 app.use(cookieParser());
 app.use(session({
     secret:'secreto',
@@ -37,5 +42,9 @@ conectarDB()
 
 const port = process.argv[2] || '8080';
 app.set('port', port);
-server.listen(port);
-console.log('Server listening on port ' + port);
+server.listen(port,()=>{
+    loggerInfo.info('Server listening on port ' + port);
+}).on('error',error=>{
+    loggerError.error(`error en el servidor: ${error}`)
+})
+
