@@ -10,38 +10,6 @@ const passport = require("passport");
 const {fork} = require("child_process")
 module.exports = app => {
   
-  app.get("/info",(req,res)=>{
-    argumentos=process.argv
-    res.status(200).send(
-      `</br> Port :${process.argv[2]}
-       </br> Id de proceso: ${process.pid}
-       </br> fecha: ${new Date()}
-` )
-  })
-
-  app.get("/random/:cant",(req,res)=>{
-  const numeros = fork("./desafio28.js")
-  let cantidad = req.params.cant
-    numeros.send({cantidad})
-    numeros.on('message',num =>{
-      res.status(200).send(num)
-    })
-   })
-
-  app.get("/random",(req,res)=>{
-    const numeros = fork("./desafio28.js")
-    numeros.send("start")
-    numeros.on('message',num =>{
-      res.status(200).send(num)
-    })
-   
-   })
-   app.get('*',(req,res)=>{
-     let {url,method}=req;
-     loggerWarn.warn(`Ruta ${method} -> ${url} no implementada`)
-     res.send(`Ruta ${method} ->${url} no implementada`)
-   })
-   
   app.get("/failLogin", (req, res) => { res.send("falla al logear")});
   app.post("/login", passport.authenticate('login', {failureRedirect: 'failLogin'}), sessionController.login);
   app.get("/failRegister", (req, res) => { res.send("falla al registrar")});
@@ -53,7 +21,6 @@ module.exports = app => {
   app.get('/contenido',middlewareAdmin.auth,(req,res) =>{
     res.send("contenido para ver")
 })
-  app.get('/productos/vista-test/:cant', ProductosController.getProductosFake);
   app.get('/productos',ProductosController.getProductos);
   app.get('/productos/:id',ProductosController.getProducto);
   app.get('/productos/cat/:categoria',ProductosController.getProductosCategoria);

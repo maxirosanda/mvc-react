@@ -1,25 +1,8 @@
 const Producto = require('../models/productos');
 var mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
-var faker = require('faker');
 
-exports.getProductosFake = async (req, res, next) => {
-  let cant = req.params.cant || 10
-  productos=[]
 
-  for(let i =0;i<cant;i++){
-    productos.push({
-      id:i+1,
-      nombre:faker.commerce.productName(),
-      descripcion:faker.commerce.productDescription(),
-      codigo:faker.finance.iban(),
-      url:faker.random.image(),
-      precio:faker.commerce.price(),
-      stock:faker.datatype.number(50)
-    })
-  }
-  res.json(productos)
-  }
  exports.getProductos = async (req, res, next) => {
   try{
      producto = await Producto.find({})

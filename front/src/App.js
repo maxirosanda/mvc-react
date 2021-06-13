@@ -8,7 +8,7 @@ import ItemContainer from './components/Item/ItemContainer'
 import LoginContainer from './components/Login/loginContainer'
 import RegisterContainer from './components/register/registerContainer'
 import ErrorIngreso from './components/cartelesError/errorContainer'
-import FakerContainer from './components/faker/FakerContainer'
+import AgregarProductoContainer from './components/agregarProducto/agregarProductoContainer'
 import { Switch, Route, BrowserRouter } from "react-router-dom"
 import {Context} from './Context'
 import ItemDetailContainer from './components/itemDetail/ItemDetailContainer'
@@ -26,8 +26,8 @@ const App = () => {
           <Route exact path="/error" component={ErrorIngreso}/>
           <Route exact path="/item/:id" component={ItemDetailContainer} />
           <Route exact path="/cart" component={CartContainer} />
+          <Route exact path="/agregar" component={AgregarProductoContainer} />
           <Route exact path="/categoria/:categoria" component={CategoryContainer}/>
-          <Route exact path="/productos/vista-test/:cant" component={FakerContainer}/>
           <Route path="/" component={ItemContainer} />{" "}
         </Switch>
         <Footer />
