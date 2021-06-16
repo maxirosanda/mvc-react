@@ -28,6 +28,7 @@ module.exports = app => {
   app.delete('/productos/:id', ProductosController.deleteProductos);
 
   app.get('/carrito', CarritoController.getCarritos);
+  app.get('/prodcard/:id', CarritoController.getProdcard);
   app.post('/carrito', CarritoController.createCarrito);
   app.put('/carrito/:id',CarritoController.updateCarrito);
   app.delete('/carrito/:id', CarritoController.deleteCarrito);

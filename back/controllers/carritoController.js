@@ -8,6 +8,15 @@ exports.getCarritos = async (req, res, next) => {
   catch (e) { console.log(e) } 
   }
 
+  exports.getProdcard = async (req, res, next) => {
+    let id = req.params.id;
+    try{
+      prodcard = await Carrito.find({_id: id}).lean()
+       await res.render(`prodcard`, {prodcard: prodcard}) 
+    }
+    catch (e) { console.log(e) } 
+    }
+
   exports.createCarrito = async (req, res, next) => {  
     console.log(req.body)
     try{
