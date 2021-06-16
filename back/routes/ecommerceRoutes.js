@@ -21,7 +21,7 @@ module.exports = app => {
     res.send("contenido para ver")
 })
 
-  app.get('/productos',ProductosController.getProductos);
+  app.get('/',ProductosController.getProductos);
   app.get('/producto/:id',ProductosController.getProducto);
   app.post('/productos', ProductosController.createProductos);
   app.put('/productos/:id', ProductosController.updateProducto);
