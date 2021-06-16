@@ -14,6 +14,22 @@ const server = http.createServer(app);
 const MongoStore =require('connect-mongo')
 const advancedOptions= {useNewUrlParser:true,useUnifiedTopology:true}
 app.use(cookieParser());
+
+const handlebars = require("express-handlebars");
+app.use(cookieParser());
+
+app.engine("hbs", handlebars({
+    extname: "hbs",
+    defaultLayout: "index",
+    layoutsDir: path.join(__dirname, "/views/layouts"),
+    partialsDir: path.join(__dirname, "/views/partials"),
+}));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+
+
 app.use(session({
     secret:'secreto',
     resave:false,

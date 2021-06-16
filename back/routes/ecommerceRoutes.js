@@ -7,48 +7,8 @@ const passport = require("passport");
 const {fork} = require("child_process")
 const numCpu = require("os").cpus().length;
 module.exports = app => {
-  let forma = process.argv[3] || "FORK"
-  app.get("/info",(req,res)=>{
-    if(forma =="FORK"){
-    const calculo = fork("./desafio28.js");
-    calculo.send('start');
-    calculo.on('message',sum =>{
-      res.status(200).send(
-        `</br> Puerto :${process.argv[2]}
-         </br> Id de proceso: ${process.pid}
-         </br> fecha: ${new Date()}
-         </br>Numero de CPUs: ${numCpu}
-  ` )
-    })
-  console.log("pasa por fork")
-  }else{
-      res.status(200).send(
-        `</br> Puerto :${process.argv[2]}
-         </br> Id de proceso: ${process.pid}
-         </br> fecha: ${new Date()}
-         </br>Numero de CPUs: ${numCpu}
-  ` )
-    }
-  })
-/*
-  app.get("/random/:cant",(req,res)=>{
-  const numeros = fork("./desafio28.js")
-  let cantidad = req.params.cant
-    numeros.send({cantidad})
-    numeros.on('message',num =>{
-      res.status(200).send(num)
-    })
-   })
-
-  app.get("/random",(req,res)=>{
-    const numeros = fork("./desafio28.js")
-    numeros.send("start")
-    numeros.on('message',num =>{
-      res.status(200).send(num)
-    })
-   
-   })
-*/
+  
+  app.get("/agregar",(req,res)=>{res.render("agregarProducto")})
    
   app.get("/failLogin", (req, res) => { res.send("falla al logear")});
   app.post("/login", passport.authenticate('login', {failureRedirect: 'failLogin'}), sessionController.login);
