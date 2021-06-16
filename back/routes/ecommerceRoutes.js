@@ -4,12 +4,11 @@ const MensajesController = require('../controllers/mensajesController');
 const middlewareAdmin = require('../middlewares/middlewareAdmin')
 const sessionController = require('../controllers/sessionController')
 const passport = require("passport");  
-const {fork} = require("child_process")
-const numCpu = require("os").cpus().length;
+
 module.exports = app => {
   
-  app.get("/agregar",(req,res)=>{res.render("agregarProducto")})
-   
+  app.get("/agregar",ProductosController.agregar)
+
   app.get("/failLogin", (req, res) => { res.send("falla al logear")});
   app.post("/login", passport.authenticate('login', {failureRedirect: 'failLogin'}), sessionController.login);
   app.get("/failRegister", (req, res) => { res.send("falla al registrar")});
@@ -21,15 +20,14 @@ module.exports = app => {
   app.get('/contenido',middlewareAdmin.auth,(req,res) =>{
     res.send("contenido para ver")
 })
-  app.get('/productos/vista-test/:cant', ProductosController.getProductosFake);
+
   app.get('/productos',ProductosController.getProductos);
-  app.get('/productos/:id',ProductosController.getProducto);
-  app.get('/productos/cat/:categoria',ProductosController.getProductosCategoria);
+  app.get('/producto/:id',ProductosController.getProducto);
   app.post('/productos', ProductosController.createProductos);
   app.put('/productos/:id', ProductosController.updateProducto);
   app.delete('/productos/:id', ProductosController.deleteProductos);
 
-  app.get('/carritos', CarritoController.getCarritos);
+  app.get('/carrito', CarritoController.getCarritos);
   app.post('/carrito', CarritoController.createCarrito);
   app.put('/carrito/:id',CarritoController.updateCarrito);
   app.delete('/carrito/:id', CarritoController.deleteCarrito);

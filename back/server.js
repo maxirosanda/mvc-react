@@ -12,11 +12,15 @@ const conectarDB = require('./config/db')
 const http = require('http'); 
 const server = http.createServer(app); 
 const MongoStore =require('connect-mongo')
+const morgan =require('morgan')
 const advancedOptions= {useNewUrlParser:true,useUnifiedTopology:true}
+const bodyParser = require("body-parser");
+const methodOverride=require('method-override')
 app.use(cookieParser());
-
+app.use(morgan('dev'))
 const handlebars = require("express-handlebars");
 app.use(cookieParser());
+app.use(methodOverride('_method'))
 
 app.engine("hbs", handlebars({
     extname: "hbs",
@@ -42,9 +46,11 @@ app.use(session({
     })
 }))
 app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-//app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({
+    extended: true
+    }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 app.disable('x-powered-by');
@@ -53,6 +59,7 @@ conectarDB()
 
 const cluster = require("cluster");
 const numCpu = require("os").cpus().length;
+
 if(cluster.isMaster && process.argv[3]=="CLUSTER") {
     console.log(numCpu);
     console.log(`process ID: ${process.pid} `);

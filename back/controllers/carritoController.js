@@ -2,8 +2,8 @@ const Carrito = require('../models/carrito');
 
 exports.getCarritos = async (req, res, next) => {
   try{
-     carrito = await Carrito.find({})
-    await res.status(200).json(carrito)  
+     carrito = await Carrito.find({}).lean() 
+    await res.render("carrito", {carrito: carrito}) 
   }
   catch (e) { console.log(e) } 
   }
@@ -13,7 +13,7 @@ exports.getCarritos = async (req, res, next) => {
     try{
       carrito = new Carrito(req.body)
       await carrito.save()
-      await res.status(200).json(carrito)  
+      await res.redirect("/carrito")
     }
   catch (e) { console.log(e) }
 }
@@ -45,7 +45,7 @@ exports.updateCarrito = async (req, res, next) => {
     let id = req.params.id;
     try{
       carrito = await  Carrito.deleteOne({_id: id})
-     await res.status(200).json(carrito)  
+      await res.redirect("/carrito")  
     }
      catch (e) { console.log(e) } 
 
